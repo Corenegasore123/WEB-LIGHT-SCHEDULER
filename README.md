@@ -6,9 +6,9 @@ This project simulates a real-world IoT dashboard to **schedule a light** using 
 
 ## Project Structure
 
-- **frontend/** → `index.html` — user-friendly scheduler web app (choose ON and OFF times)
-- **backend/** → `server.py` — WebSocket server receiving schedules and forwarding to MQTT broker
-- **subscriber/** → `subscriber.py` — MQTT subscriber that controls Arduino via serial communication
+-**WebLightScheduler.html**
+-**WebLightScheduler.html**
+
 
 ---
 
