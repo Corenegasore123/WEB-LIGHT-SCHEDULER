@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light Scheduler</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    h1 { color: #333; }
+    form { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, button { margin: 10px 0; padding: 10px; width: 100%; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background: #45a049; }
+    .bulb { margin-top: 20px; width: 80px; height: 80px; border-radius: 50%; background: #ccc; box-shadow: 0 0 10px #999; }
+    .on { background: yellow; box-shadow: 0 0 30px yellow; }
+  </style>
+</head>
+<body>
+
+  <h1>Light Scheduler</h1>
+  <form id="schedulerForm">
+    <input type="time" id="onTime" required>
+    <input type="time" id="offTime" required>
+    <button type="submit">Submit Schedule</button>
+  </form>
+
+  <div class="bulb" id="lightBulb"></div>
+
+  <script>
+    const form = document.getElementById('schedulerForm');
+    const ws = new WebSocket('ws://localhost:8765');
+    const bulb = document.getElementById('lightBulb');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const onTime = document.getElementById('onTime').value;
+      const offTime = document.getElementById('offTime').value;
+      const schedule = { on: onTime, off: offTime };
+      ws.send(JSON.stringify(schedule));
+      alert('Schedule sent!');
+    });
+
+    // Dummy simulation to change bulb status after some seconds
+    ws.onmessage = (message) => {
+      if (message.data === '1') {
+        bulb.classList.add('on');
+      } else if (message.data === '0') {
+        bulb.classList.remove('on');
+      }
+    };
+  </script>
+
+</body>
+</html>
