@@ -29,15 +29,8 @@ Start Mosquitto Broker:
 Run the WebSocket server:
 
 Arduino will turn relay ON or OFF at scheduled times.
-```bash
 
-
-Screenshots 
-Example:
-![alt text](./image.png)
-
-```bash
-Web App	Terminal Logs	Arduino Reaction
+WebApp	Terminal Logs	Arduino Reaction
 
 Name: TURINUMUGISHA Gasore Corene
 School: Rwanda Coding Academy
